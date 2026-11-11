@@ -216,7 +216,7 @@ export function Hero({ ready, onMenu }: { ready: boolean; onMenu: () => void }) 
 
         <p className="h-in serif absolute right-[var(--m)] top-[12%] z-20 hidden text-right text-[clamp(2rem,1.2rem+2.4vw,3.8rem)] leading-[1.02] md:block">Automation by trade.<br />Builder by habit.</p>
 
-        <div id="about" className="h-in absolute bottom-[calc(var(--m)*2.4)] left-[var(--m)] z-30 max-w-[430px]">
+        <div id="about" className="h-in absolute bottom-[calc(var(--m)*2.4)] left-[calc(var(--m)-16px)] z-30 max-w-[462px] rounded-[14px] bg-[rgba(35,55,198,.72)] p-4 shadow-[0_10px_40px_rgba(14,14,17,.18)] backdrop-blur-md [-webkit-backdrop-filter:blur(12px)]">
           <p className="text-[1.35rem] font-medium tracking-tight">AI Automation &amp; Platform Engineer</p>
           <p className="mt-2 text-[1.02rem] leading-snug text-[#dcd7f5] pretty">I'm Sayak, from Agartala. I turn the work people repeat every morning (router configs, site checks, bookkeeping) into software that does it for them.</p>
           <p className="mono mt-3 hidden text-[#c9cff5] [@media(min-height:760px)]:md:block">◎ Move your cursor to look behind the page · 2001 → 2025</p>
