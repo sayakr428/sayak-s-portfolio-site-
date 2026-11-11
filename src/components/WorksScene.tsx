@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { finePointer, gsap, prefersReduced } from "@/lib/motion";
+import { finePointer, gsap, isLite, prefersReduced } from "@/lib/motion";
+import { AutoVideo } from "@/components/AutoVideo";
 import { BUILDS, openProject } from "@/data/showcase";
 import { DerqDiagram } from "@/components/DerqDiagram";
 
@@ -10,6 +11,7 @@ import { DerqDiagram } from "@/components/DerqDiagram";
 export function WorksScene() {
   const stage = useRef<HTMLDivElement>(null);
   const [on, setOn] = useState(-1);
+  const [lite] = useState(isLite);
   // the room leans a little toward the pointer
   useEffect(() => {
     const el = stage.current; if (!el || !finePointer() || prefersReduced()) return;
@@ -22,14 +24,17 @@ export function WorksScene() {
   return (
     <section id="work" aria-labelledby="wk-h" className="relative h-full w-full overflow-hidden bg-[linear-gradient(#c8b098,#e3d6c5)] text-[var(--ink)]">
       <div className="absolute inset-0 [perspective:1800px]">
-        {/* centred by translate (a grid would push an over-wide child to one side); on phones the scene is shorter than the screen and drifts left to right */}
-        <div className="wk-pan absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ width: "max(100vw, min(179.2svh, 250vw))" }}>
+        {/* centred by translate (a grid would push an over-wide child to one side); on portrait screens the whole scene shows, all six devices in view */}
+        <div className="wk-pan absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div ref={stage} className="relative w-full [transform-style:preserve-3d]" style={{ aspectRatio: "2752 / 1536" }}>
           <img src="/work/works.jpg" alt="The word WORKS in giant hollow plaster letters, with a tablet, two phones, a laptop, a monitor and a portrait tablet standing in front of them" className="absolute inset-0 h-full w-full" />
           {BUILDS.map((b, i) => (
             <div key={b.id} aria-hidden className="absolute overflow-hidden bg-[#111216] transition-[transform,filter] duration-500 ease-[var(--ease-out)]"
               style={{ left: `${b.screen.x}%`, top: `${b.screen.y}%`, width: `${b.screen.w}%`, height: `${b.screen.h}%`, transform: on === i ? "translateY(-4%) scale(1.04)" : "none", filter: on >= 0 && on !== i ? "brightness(.55)" : "none" }}>
-              {b.media.video ? <video src={b.media.video} muted loop autoPlay playsInline preload="metadata" className="h-full w-full object-cover" />
+              {b.media.video ? (lite
+                  // in lite mode the screens are a few dozen pixels wide: a still reads the same and costs nothing
+                  ? <img src={b.media.video.replace(".mp4", ".jpg")} alt="" className="h-full w-full object-cover" />
+                  : <AutoVideo src={b.media.video} poster={b.media.video.replace(".mp4", ".jpg")} className="h-full w-full object-cover" />)
                 : b.media.img ? <img src={b.media.img} alt="" className="h-full w-full object-cover object-top" />
                 : <div className="h-full w-full text-[5px]"><DerqDiagram /></div>}
             </div>
@@ -44,7 +49,7 @@ export function WorksScene() {
         </div>
         </div>
       </div>
-      <style>{`@media (max-aspect-ratio: 1/1){.wk-pan{animation:wkpan 22s ease-in-out infinite alternate}}@keyframes wkpan{from{translate:-28% -50%}to{translate:-72% -50%}}@media (prefers-reduced-motion: reduce){.wk-pan{animation:none!important}}`}</style>
+      <style>{`.wk-pan{width:max(100vw,179.2svh)}@media (max-aspect-ratio: 1/1){.wk-pan{width:112vw;-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}}`}</style>
 
       <div className="wrap pointer-events-none absolute inset-x-0 top-[calc(var(--m)*1.1)] flex flex-wrap items-start gap-x-8 gap-y-3">
         <h2 id="wk-h" className="display text-[clamp(3.6rem,7vw,7.5rem)]">Works.</h2>

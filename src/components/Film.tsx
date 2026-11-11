@@ -11,9 +11,9 @@ export function Film() {
   };
   return (
     <section id="film" className="relative h-full w-full overflow-hidden bg-black text-[var(--bone)]" aria-labelledby="fm-h">
-      <video ref={vid} src="/film/handedon.mp4" poster="/film/handedon-poster.jpg" playsInline preload="metadata" controls={playing}
+      <video ref={vid} src="/film/handedon.mp4" poster="/film/handedon-poster.jpg" playsInline preload="none" controls={playing}
         onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)} onEnded={() => setPlaying(false)}
-        className="absolute inset-0 h-full w-full object-cover" aria-label="Handed On, a short film about Sayak Roy" />
+        className="absolute inset-0 h-full w-full object-cover [@media(max-aspect-ratio:1/1)]:object-contain" aria-label="Handed On, a short film about Sayak Roy" />
       {!playing && (
         <>
           <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,.15),rgba(0,0,0,.7))]" />

@@ -4,10 +4,44 @@ import { SplitText } from "gsap/SplitText";
 import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
+// phones hide and show the address bar while scrolling; that resize must not re-measure every trigger mid-scroll
+ScrollTrigger.config({ ignoreMobileResize: true });
 
 export const prefersReduced = () =>
   typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 export const finePointer = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+/**
+ * Lite mode: phones, tablets and low-power machines (few cores, little memory, or data saver on).
+ * The design stays the same; lite only trims invisible work: lower canvas resolution, fewer sprites,
+ * stills where a screen is too small for video to read. Desktop with a decent CPU never enters it.
+ */
+type Nav = Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
+let liteCache: boolean | null = null;
+export const isLite = () => {
+  if (liteCache !== null) return liteCache;
+  if (typeof window === "undefined") return false;
+  const n = navigator as Nav;
+  liteCache = matchMedia("(pointer: coarse)").matches || matchMedia("(max-width: 900px)").matches
+    || (n.hardwareConcurrency ?? 8) <= 4 || (n.deviceMemory ?? 8) <= 4 || !!n.connection?.saveData;
+  return liteCache;
+};
+/** Portrait screens show wide scenes whole instead of filling their height. */
+export const isPortrait = () => typeof window !== "undefined" && matchMedia("(max-aspect-ratio: 1/1)").matches;
+
+/**
+ * Plays a video only while it is on screen (and starts loading it just before), pausing it when it leaves.
+ * Returns a cleanup. Used for every looping video so nothing decodes out of sight.
+ */
+export function playWhenVisible(v: HTMLVideoElement, margin = "200px") {
+  v.preload = "none";
+  const io = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { if (v.preload === "none") v.preload = "auto"; v.play().catch(() => {}); }
+    else v.pause();
+  }, { rootMargin: margin });
+  io.observe(v);
+  return () => io.disconnect();
+}
 
 let lenis: Lenis | null = null;
 

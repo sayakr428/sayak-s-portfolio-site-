@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { openBrief } from "@/data/briefs";
+import { AutoVideo } from "@/components/AutoVideo";
 
 // hotspots in % of the frame (the still and its living loop share one framing); lab experiments only, nothing from Works
 const SPOTS = [
@@ -19,8 +20,8 @@ export function Lab() {
   return (
     <section id="lab" className="relative h-full w-full overflow-hidden bg-[#120d0a] text-[var(--bone)]" aria-labelledby="lab-h">
       <div className="absolute inset-0">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ width: "max(100vw, min(177.78svh, 230vw))", aspectRatio: "16 / 9" }} onMouseLeave={() => setOn(-1)}>
-          <video src="/lab/lab.mp4" poster="/lab/lab-still.jpg" muted loop autoPlay playsInline className="absolute inset-0 h-full w-full object-cover" aria-label="A lamplit study seen from above: blueprint board, desk, server rack, satellite probe, drafting table and bookshelf" />
+        <div className="lab-room absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ aspectRatio: "16 / 9" }} onMouseLeave={() => setOn(-1)}>
+          <AutoVideo src="/lab/lab.mp4" poster="/lab/lab-still.jpg" className="absolute inset-0 h-full w-full object-cover" aria-label="A lamplit study seen from above: blueprint board, desk, server rack, satellite probe, drafting table and bookshelf" />
           <div aria-hidden className="pointer-events-none absolute inset-0 transition-opacity duration-500" style={{ opacity: s ? 1 : 0, background: `radial-gradient(ellipse ${s ? s.w * .9 : 10}% ${s ? s.h * .9 : 10}% at ${cx}% ${cy}%, transparent 60%, rgba(8,8,10,.74) 100%)` }} />
           {SPOTS.map((p, i) => (
             <button key={p.key} type="button" onMouseEnter={() => setOn(i)} onFocus={() => setOn(i)} onBlur={() => setOn(-1)} onClick={() => openBrief(p.key)}
@@ -58,7 +59,7 @@ export function Lab() {
           </li>
         ))}
       </ol>
-      <style>{`@keyframes lpulse{0%,100%{box-shadow:0 0 0 0 rgba(236,231,221,.5)}50%{box-shadow:0 0 0 10px rgba(236,231,221,0)}}`}</style>
+      <style>{`.lab-room{width:max(100vw,177.78svh)}@media (max-aspect-ratio: 1/1){.lab-room{width:100vw}}@keyframes lpulse{0%,100%{box-shadow:0 0 0 0 rgba(236,231,221,.5)}50%{box-shadow:0 0 0 10px rgba(236,231,221,0)}}`}</style>
     </section>
   );
 }

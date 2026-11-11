@@ -36,7 +36,7 @@ export function ProjectViewer() {
   const [side, setSide] = useState(true);
 
   useEffect(() => {
-    const on = (e: Event) => { const x = BUILDS.find((y) => y.id === (e as CustomEvent<string>).detail); if (x) { setB(x); setScreen(0); setPhone(x.mode.kind === "live" && !!x.mode.phone && innerWidth < 900); setSide(innerWidth > 1100); } };
+    const on = (e: Event) => { const x = BUILDS.find((y) => y.id === (e as CustomEvent<string>).detail); if (x) { setB(x); setScreen(0); setPhone(x.mode.kind === "live" && innerWidth < 900); setSide(innerWidth > 1100); } };
     window.addEventListener("project", on);
     return () => window.removeEventListener("project", on);
   }, []);
@@ -58,7 +58,7 @@ export function ProjectViewer() {
   const brief = briefFor(b.id);
   const m = b.mode;
   const i = BUILDS.indexOf(b);
-  const go = (d: number) => { const n = BUILDS[(i + d + BUILDS.length) % BUILDS.length]; setB(n); setScreen(0); setPhone(false); };
+  const go = (d: number) => { const n = BUILDS[(i + d + BUILDS.length) % BUILDS.length]; setB(n); setScreen(0); setPhone(n.mode.kind === "live" && innerWidth < 900); };
 
   // the device: a browser window for sites and apps, a phone when asked
   const content = m.kind === "live" ? <Live url={m.url} vw={phone ? 390 : 1440} />
@@ -86,13 +86,13 @@ export function ProjectViewer() {
         </div>
       </header>
 
-      <div className="flex min-h-0 flex-1">
+      <div className="relative flex min-h-0 flex-1">
         <div className="relative grid min-w-0 flex-1 place-items-center p-[clamp(12px,2.4vw,40px)] [perspective:1600px]">
           <div className={`pv-device relative flex flex-col overflow-hidden ${phone ? "aspect-[390/844] h-full max-h-[780px] rounded-[44px] border-[10px] border-[#0b0b0d] shadow-[0_0_0_2px_#3a3a40,0_40px_100px_rgba(0,0,0,.55)]" : "h-full w-full max-w-[1500px] rounded-[14px] shadow-[0_0_0_1px_rgba(255,255,255,.12),0_40px_100px_rgba(0,0,0,.55)]"}`}>
             {!phone && (
               <div className="flex shrink-0 items-center gap-3 bg-[#2a2622] px-4 py-2.5">
                 <span className="flex gap-1.5" aria-hidden><i className="h-3 w-3 rounded-full bg-[#ff5f57]" /><i className="h-3 w-3 rounded-full bg-[#febc2e]" /><i className="h-3 w-3 rounded-full bg-[#28c840]" /></span>
-                <span className="mono mx-auto max-w-[60%] truncate rounded-md bg-[#1a1714] px-4 py-1 text-[#c9c4ba]">{addr}</span>
+                <span className="mono mx-auto hidden max-w-[60%] truncate rounded-md bg-[#1a1714] px-4 py-1 text-[#c9c4ba] sm:inline">{addr}</span>
                 {(m.kind === "live" || m.kind === "still") && <a href={m.url} target="_blank" rel="noreferrer" className="mono text-[#c9c4ba] hover:text-white">Open in a tab ↗</a>}
               </div>
             )}
@@ -104,12 +104,12 @@ export function ProjectViewer() {
             <div className="relative min-h-0 flex-1">{content}</div>
             {m.kind === "still" && <p className="mono absolute inset-x-0 bottom-0 bg-[#1a1714]/90 px-4 py-3 text-[#c9c4ba]">{m.note} <a href={m.url} target="_blank" rel="noreferrer" className="uline text-white">Open {b.name} ↗</a></p>}
           </div>
-          {m.kind === "live" && <p className="mono absolute bottom-1 left-1/2 -translate-x-1/2 text-[var(--muted)]">Live site, fully usable here: scroll, click, type.</p>}
-          {m.kind === "app" && <p className="mono absolute bottom-1 left-1/2 -translate-x-1/2 text-[var(--muted)]">Real screens from the app. Switch between them above.</p>}
+          {m.kind === "live" && <p className="mono absolute bottom-1 left-1/2 hidden -translate-x-1/2 text-[var(--muted)] md:block">Live site, fully usable here: scroll, click, type.</p>}
+          {m.kind === "app" && <p className="mono absolute bottom-1 left-1/2 hidden -translate-x-1/2 text-[var(--muted)] md:block">Real screens from the app. Switch between them above.</p>}
         </div>
 
         {side && (
-          <aside className="w-[min(420px,40vw)] shrink-0 overflow-y-auto border-l border-white/10 p-[clamp(16px,2vw,28px)]" aria-label="Brief">
+          <aside className="absolute inset-0 z-10 overflow-y-auto bg-[#1a1714] p-[clamp(16px,2vw,28px)] md:static md:z-auto md:w-[min(420px,40vw)] md:shrink-0 md:border-l md:border-white/10" aria-label="Brief">
             <p className="serif text-[1.5rem] leading-[1.15] pretty">{brief.what}</p>
             {brief.problem && <><h3 className="mono mt-6 text-[var(--muted)]">The problem</h3><p className="mt-2 leading-relaxed text-[#d6d1c7] pretty">{brief.problem}</p></>}
             {brief.built.length > 0 && <><h3 className="mono mt-6 text-[var(--muted)]">What I built</h3>

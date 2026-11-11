@@ -1,21 +1,21 @@
 import { useEffect, useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { finePointer, gsap, prefersReduced, scrollToId, ScrollTrigger, SplitText } from "@/lib/motion";
+import { finePointer, gsap, isLite, prefersReduced, scrollToId, ScrollTrigger, SplitText } from "@/lib/motion";
 import { PROFILE } from "@/data/profile";
 import { openBrief } from "@/data/briefs";
 
 // what rides the film strip: real work, looping
-const FRAMES: { label: string; src: string; video?: boolean; brief?: string }[] = [
-  { label: "Derq Ops", src: "/broll/traffic.mp4", video: true, brief: "derq" },
-  { label: "Shantiban City", src: "/live/walkthrough.mp4", video: true, brief: "shantiban" },
+const FRAMES: { label: string; src: string; video?: boolean; brief?: string; poster?: string }[] = [
+  { label: "Derq Ops", src: "/broll/traffic.mp4", video: true, brief: "derq", poster: "/broll/traffic.jpg" },
+  { label: "Shantiban City", src: "/live/walkthrough.mp4", video: true, brief: "shantiban", poster: "/live/walkthrough.jpg" },
   { label: "MyChiffre", src: "/work/mc-dashboard.jpg", brief: "vitacount" },
-  { label: "Handed On", src: "/film/handedon.mp4", video: true },
-  { label: "WebGrow .AI", src: "/live/webgrow-ai.mp4", video: true, brief: "webgrow-ai" },
-  { label: "The lab", src: "/lab/lab.mp4", video: true },
+  { label: "Handed On", src: "/film/handedon.mp4", video: true, poster: "/film/handedon-poster.jpg" },
+  { label: "WebGrow .AI", src: "/live/webgrow-ai.mp4", video: true, brief: "webgrow-ai", poster: "/live/webgrow-ai.jpg" },
+  { label: "The lab", src: "/lab/lab.mp4", video: true, poster: "/lab/lab-still.jpg" },
   { label: "Stellar", src: "/work/stellar.webp", brief: "stellar" },
-  { label: "WebGrow360", src: "/live/webgrow.mp4", video: true, brief: "webgrow" },
-  { label: "Data centre", src: "/broll/datacenter.mp4", video: true },
-  { label: "Mrityika Estates", src: "/live/mrityika.mp4", video: true, brief: "shantiban" },
+  { label: "WebGrow360", src: "/live/webgrow.mp4", video: true, brief: "webgrow", poster: "/live/webgrow.jpg" },
+  { label: "Data centre", src: "/broll/datacenter.mp4", video: true, poster: "/broll/datacenter.jpg" },
+  { label: "Mrityika Estates", src: "/live/mrityika.mp4", video: true, brief: "shantiban", poster: "/live/mrityika.jpg" },
 ];
 
 // behind the page: the same person at every age, with the technology of each year (three panels, nine figures)
@@ -30,12 +30,20 @@ function useFilmStrip(canvasRef: React.RefObject<HTMLCanvasElement | null>, spee
     const cv = canvasRef.current; if (!cv) return;
     const g = cv.getContext("2d")!;
     const reduce = prefersReduced();
+    const lite = isLite();
+    // every frame has a still; videos (never in lite mode) load and play only while their frame is on screen
+    const stills = FRAMES.map((f) => { const im = new Image(); im.decoding = "async"; im.src = f.poster ?? f.src; return im; });
     const media = FRAMES.map((f) => {
-      if (f.video) { const v = document.createElement("video"); v.src = f.src; v.muted = true; v.loop = true; v.playsInline = true; v.preload = "auto"; v.play().catch(() => {}); return v; }
-      const im = new Image(); im.src = f.src; return im;
+      if (!f.video || lite) return null;
+      const v = document.createElement("video"); v.muted = true; v.loop = true; v.playsInline = true; v.preload = "none"; v.dataset.src = f.src; return v;
     });
+    const want = (i: number, on: boolean) => {
+      const v = media[i]; if (!v) return;
+      if (on) { if (!v.src) { v.src = v.dataset.src!; v.preload = "auto"; } if (v.paused && !paused.current) v.play().catch(() => {}); }
+      else if (!v.paused) v.pause();
+    };
     let W = 0, H = 0, dpr = 1, off = 0, raf = 0, last = performance.now(), hover = -1;
-    const size = () => { dpr = Math.min(2, devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; };
+    const size = () => { dpr = Math.min(lite ? 1.5 : 2, devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; };
     size();
     const ro = new ResizeObserver(size); ro.observe(cv);
 
@@ -68,12 +76,16 @@ function useFilmStrip(canvasRef: React.RefObject<HTMLCanvasElement | null>, spee
         }
       }
       // the frames, in slices that follow the curve
-      const SL = 18;
+      const SL = lite ? 10 : 18;
       FRAMES.forEach((f, i) => {
-        const x0 = frameX(i); if (x0 > W + 10 || x0 + fw < -10) return;
-        const m = media[i] as HTMLVideoElement & HTMLImageElement;
-        const sw = f.video ? m.videoWidth : m.naturalWidth, sh = f.video ? m.videoHeight : m.naturalHeight;
-        const ok = sw > 0 && (!f.video || m.readyState >= 2);
+        const x0 = frameX(i); const vis = !(x0 > W + 10 || x0 + fw < -10);
+        want(i, vis); if (!vis) return;
+        // the clip once it has a frame to show, the still until then
+        const v = media[i];
+        const useVid = !!v && v.readyState >= 2 && v.videoWidth > 0;
+        const m: CanvasImageSource = useVid ? v! : stills[i];
+        const sw = useVid ? v!.videoWidth : stills[i].naturalWidth, sh = useVid ? v!.videoHeight : stills[i].naturalHeight;
+        const ok = sw > 0;
         // object-fit: cover, top-aligned for screenshots
         let cx = 0, cy = 0, cw = sw, ch = sh;
         if (ok) { const k = Math.max(fw / sw, ih / sh); cw = fw / k; ch = ih / k; cx = (sw - cw) / 2; cy = f.video ? (sh - ch) / 2 : 0; }
@@ -96,12 +108,18 @@ function useFilmStrip(canvasRef: React.RefObject<HTMLCanvasElement | null>, spee
       });
     };
     const tick = (now: number) => {
+      if (!running) return;
       raf = requestAnimationFrame(tick);
       const dt = Math.min(64, now - last); last = now;
       if (!paused.current && !reduce) off += dt * .055 * speed.current.v;
       draw();
     };
-    raf = requestAnimationFrame(tick);
+    // the loop runs only while the strip is on screen
+    let running = false;
+    const startLoop = () => { if (!running) { running = true; last = performance.now(); raf = requestAnimationFrame(tick); } };
+    const stopLoop = () => { running = false; cancelAnimationFrame(raf); media.forEach((v) => v && !v.paused && v.pause()); };
+    const vio = new IntersectionObserver(([e]) => (e.isIntersecting ? startLoop() : stopLoop()));
+    vio.observe(cv);
 
     // pointing: which frame is under the pointer, and is it inside the band?
     const hit = (e: PointerEvent | MouseEvent) => {
@@ -114,9 +132,10 @@ function useFilmStrip(canvasRef: React.RefObject<HTMLCanvasElement | null>, spee
     const leave = () => { hover = -1; };
     const click = (e: MouseEvent) => { const i = hit(e); if (i >= 0 && FRAMES[i].brief) openBrief(FRAMES[i].brief!); };
     cv.addEventListener("pointermove", move); cv.addEventListener("pointerleave", leave); cv.addEventListener("click", click);
-    const onPause = (e: Event) => { const p = (e as CustomEvent<boolean>).detail; media.forEach((m) => { if (m instanceof HTMLVideoElement) { if (p) m.pause(); else m.play().catch(() => {}); } }); };
+    // a modal pauses every clip; on resume the draw loop restarts only the ones on screen
+    const onPause = (e: Event) => { if ((e as CustomEvent<boolean>).detail) media.forEach((m) => m?.pause()); };
     window.addEventListener("motion", onPause);
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); cv.removeEventListener("pointermove", move); cv.removeEventListener("pointerleave", leave); cv.removeEventListener("click", click); window.removeEventListener("motion", onPause); media.forEach((m) => { if (m instanceof HTMLVideoElement) { m.pause(); m.removeAttribute("src"); m.load(); } }); };
+    return () => { vio.disconnect(); stopLoop(); ro.disconnect(); cv.removeEventListener("pointermove", move); cv.removeEventListener("pointerleave", leave); cv.removeEventListener("click", click); window.removeEventListener("motion", onPause); media.forEach((m) => { if (m instanceof HTMLVideoElement) { m.pause(); m.removeAttribute("src"); m.load(); } }); };
   }, [canvasRef, speed, paused]);
 }
 
@@ -137,18 +156,30 @@ export function Hero({ ready, onMenu }: { ready: boolean; onMenu: () => void }) 
     return () => { st.kill(); window.removeEventListener("motion", onPause); };
   }, []);
 
-  // the lens: a hole through the whole hero that follows the pointer (on touch screens it drifts on its own)
+  // the lens: a hole through the whole hero that follows the pointer.
+  // On touch screens it drifts across once as an introduction, then follows a finger and closes when the finger lifts.
   useEffect(() => {
     const el = face.current, rg = ring.current, sec = root.current; if (!el || !rg || !sec) return;
     const p = { x: innerWidth * .62, y: innerHeight * .45, r: 0 };
-    const apply = () => { el.style.setProperty("--lx", `${p.x}px`); el.style.setProperty("--ly", `${p.y}px`); el.style.setProperty("--lr", `${p.r}px`); rg.style.transform = `translate(${p.x - p.r}px, ${p.y - p.r}px)`; rg.style.width = rg.style.height = `${p.r * 2}px`; rg.style.opacity = p.r > 4 ? "1" : "0"; };
+    const apply = () => { el.style.setProperty("--lx", `${p.x}px`); el.style.setProperty("--ly", `${p.y}px`); el.style.setProperty("--lr", `${p.r}px`); rg.style.transform = `translate(${p.x - p.r}px, ${p.y - p.r}px)`; rg.style.width = rg.style.height = `${p.r * 2}px`; rg.style.opacity = p.r > 4 ? "1" : "0"; sec.classList.toggle("lens-on", p.r > 4); };
     const R = () => Math.max(120, Math.min(innerWidth, innerHeight) * .26);
     apply();
     if (prefersReduced()) return;
     if (!finePointer()) {
-      gsap.to(p, { r: R() * .8, duration: 1.2, delay: 2, onUpdate: apply });
-      const tw = gsap.to(p, { keyframes: [{ x: innerWidth * .25, y: innerHeight * .55 }, { x: innerWidth * .75, y: innerHeight * .4 }, { x: innerWidth * .5, y: innerHeight * .6 }], duration: 14, repeat: -1, yoyo: true, ease: "sine.inOut", onUpdate: apply });
-      return () => { tw.kill(); };
+      const intro = gsap.timeline({ delay: 2, onUpdate: apply })
+        .to(p, { r: R() * .8, duration: 1.2, ease: "back.out(1.4)" })
+        .to(p, { keyframes: [{ x: innerWidth * .28, y: innerHeight * .55 }, { x: innerWidth * .72, y: innerHeight * .42 }], duration: 6, ease: "sine.inOut" }, "<")
+        .to(p, { r: 0, duration: .6, ease: "power3.in" });
+      let lift = 0;
+      const touch = (e: PointerEvent) => {
+        if (e.pointerType === "mouse") return;
+        intro.kill(); clearTimeout(lift);
+        const r = sec.getBoundingClientRect(); p.x = e.clientX - r.left; p.y = e.clientY - r.top;
+        if (p.r < R() * .7) gsap.to(p, { r: R() * .8, duration: .4, ease: "back.out(1.4)", onUpdate: apply, overwrite: "auto" }); else apply();
+      };
+      const up = () => { lift = window.setTimeout(() => gsap.to(p, { r: 0, duration: .45, ease: "power3.in", onUpdate: apply, overwrite: "auto" }), 900); };
+      sec.addEventListener("pointerdown", touch); sec.addEventListener("pointermove", touch); sec.addEventListener("pointerup", up); sec.addEventListener("pointercancel", up);
+      return () => { intro.kill(); clearTimeout(lift); sec.removeEventListener("pointerdown", touch); sec.removeEventListener("pointermove", touch); sec.removeEventListener("pointerup", up); sec.removeEventListener("pointercancel", up); };
     }
     const qx = gsap.quickTo(p, "x", { duration: .45, ease: "power3.out", onUpdate: apply }), qy = gsap.quickTo(p, "y", { duration: .45, ease: "power3.out", onUpdate: apply });
     const move = (e: PointerEvent) => { const r = sec.getBoundingClientRect(); qx(e.clientX - r.left); qy(e.clientY - r.top); };
@@ -188,7 +219,7 @@ export function Hero({ ready, onMenu }: { ready: boolean; onMenu: () => void }) 
             </div>
           ))}
         </div>
-        <style>{`.hero-years{animation:years 70s linear infinite}@keyframes years{to{translate:-50% -42%}}@media (prefers-reduced-motion: reduce){.hero-years{animation:none}}`}</style>
+        <style>{`.hero-years{animation:years 70s linear infinite;animation-play-state:paused}.lens-on .hero-years{animation-play-state:running}@keyframes years{to{translate:-50% -42%}}@media (prefers-reduced-motion: reduce){.hero-years{animation:none}}`}</style>
       </div>
 
       {/* the page itself, with a hole cut where the lens is */}

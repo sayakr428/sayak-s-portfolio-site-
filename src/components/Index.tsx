@@ -21,14 +21,16 @@ function Rolodex() {
     if (prefersReduced()) return;
     const s = { a: 0, v: .12, drag: false, last: 0, boost: 0 };
     const tick = () => { if (!s.drag) s.a += s.v + s.boost; s.boost *= .92; el.style.transform = `translateZ(${-R}px) rotateX(${s.a}deg)`; };
-    gsap.ticker.add(tick);
+    // spin only while the rolodex is on screen
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? gsap.ticker.add(tick) : gsap.ticker.remove(tick)));
+    io.observe(el);
     const wheel = () => { s.boost = Math.min(4, s.boost + .6); };
     const down = (e: PointerEvent) => { s.drag = true; s.last = e.clientY; el.setPointerCapture(e.pointerId); };
     const move = (e: PointerEvent) => { if (!s.drag) return; s.a += (e.clientY - s.last) * -.5; s.last = e.clientY; };
     const up = () => { s.drag = false; };
     window.addEventListener("wheel", wheel, { passive: true });
     el.addEventListener("pointerdown", down); el.addEventListener("pointermove", move); el.addEventListener("pointerup", up); el.addEventListener("pointercancel", up);
-    return () => { gsap.ticker.remove(tick); window.removeEventListener("wheel", wheel); el.removeEventListener("pointerdown", down); el.removeEventListener("pointermove", move); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up); };
+    return () => { io.disconnect(); gsap.ticker.remove(tick); window.removeEventListener("wheel", wheel); el.removeEventListener("pointerdown", down); el.removeEventListener("pointermove", move); el.removeEventListener("pointerup", up); el.removeEventListener("pointercancel", up); };
   }, [R]);
   return (
     <div className="relative h-[460px] select-none [perspective:1100px]" style={{ maskImage: "linear-gradient(transparent, #000 22%, #000 78%, transparent)", WebkitMaskImage: "linear-gradient(transparent, #000 22%, #000 78%, transparent)" }}>

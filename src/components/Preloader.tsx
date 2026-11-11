@@ -9,12 +9,14 @@ export function Preloader({ onDone }: { onDone: () => void }) {
     const el = root.current; if (!el) return;
     if (prefersReduced()) { onDone(); return; }
     const c = { v: 0 };
-    let loaded = document.readyState === "complete";
+    // wait only for what the first screen needs (the fonts), never for every image on the page; cap it at ~2.5 s
+    let loaded = false;
+    document.fonts.ready.then(() => { loaded = true; });
     const onLoad = () => { loaded = true; };
     window.addEventListener("load", onLoad);
     const tl = gsap.timeline();
     tl.to(c, { v: 86, duration: 1.4, ease: "power2.inOut", onUpdate: () => setN(Math.round(c.v)) })
-      .add(() => { if (!loaded) tl.pause(); const t = setInterval(() => { if (loaded || performance.now() > 6000) { clearInterval(t); tl.play(); } }, 80); })
+      .add(() => { if (!loaded) tl.pause(); const t = setInterval(() => { if (loaded || performance.now() > 2500) { clearInterval(t); tl.play(); } }, 80); })
       .to(c, { v: 100, duration: .45, ease: "power1.out", onUpdate: () => setN(Math.round(c.v)) })
       .to(el.querySelector(".pl-count"), { yPercent: -110, duration: .5, ease: "power3.in" }, "+=.1")
       .to(el, { clipPath: "inset(0 0 100% 0)", duration: .9, ease: "expo.inOut" }, "-=.15")

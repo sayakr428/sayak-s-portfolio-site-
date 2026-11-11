@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
-import { finePointer, gsap, pauseScroll, prefersReduced } from "@/lib/motion";
+import { finePointer, gsap, isPortrait, pauseScroll, prefersReduced } from "@/lib/motion";
 import { HOPS, type Hop } from "@/data/profile";
 
 // one room per stop, in % of the building image; the camera visits them in career order
@@ -25,7 +25,8 @@ export function Experience() {
     const cam = root.current?.querySelector<HTMLElement>(".ex-cam"); if (!cam) return;
     const at = (r?: (typeof ROOMS)[number]) => {
       if (!r) return { scale: 1, xPercent: 0, yPercent: 0 };
-      const s = Math.min(1.9, 100 / Math.max(r.w, r.h * 1.05));
+      // on portrait screens the whole building is shown, so the camera goes further in to fill the width with a room
+      const s = isPortrait() ? 100 / r.w : Math.min(1.9, 100 / Math.max(r.w, r.h * 1.05));
       return { scale: s, xPercent: (50 - (r.x + r.w / 2)) * s, yPercent: (50 - (r.y + r.h / 2)) * s };
     };
     if (prefersReduced()) return;
@@ -58,10 +59,10 @@ export function Experience() {
   const r = lit >= 0 ? ROOMS[lit] : null;
   const room = open >= 0 ? ROOMS[open] : null;
   return (
-    <section ref={root} id="experience" className="relative -mt-[100svh] bg-[#e4e4e2] text-[var(--ink)]" style={{ height: prefersReduced() ? "auto" : `${(ROOMS.length + 2) * 100}svh` }} aria-labelledby="ex-h">
+    <section ref={root} id="experience" data-zoom={cur >= 0} className="relative -mt-[100svh] bg-[#e4e4e2] text-[var(--ink)]" style={{ height: prefersReduced() ? "auto" : `${(ROOMS.length + 2) * 100}svh` }} aria-labelledby="ex-h">
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <div className="absolute inset-0 [perspective:1600px]">
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ width: "max(100vw, 177.78svh)" }}>
+          <div className="ex-bld absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <div ref={tilt} className="relative w-full [transform-style:preserve-3d]" style={{ aspectRatio: "16 / 9" }}>
             <div className="ex-cam absolute inset-0 origin-center will-change-transform">
               <img src={IMG} alt="A cutaway of one building with four rooms: a university lab, a consulting floor, a network operations centre and a traffic operations room" className="absolute inset-0 h-full w-full object-cover" />
@@ -74,7 +75,7 @@ export function Experience() {
                   className="group absolute outline-none" data-cursor="enter" aria-label={`${x.hop.org}, ${x.hop.span}: walk into the ${x.label}`}
                   style={{ left: `${x.x}%`, top: `${x.y}%`, width: `${x.w}%`, height: `${x.h}%` }}>
                   <span aria-hidden className="absolute inset-0 transition-[box-shadow] duration-300" style={{ boxShadow: lit === i ? "inset 0 0 0 2px var(--signal)" : "none" }} />
-                  <span className="mono absolute left-3 top-3 bg-[var(--ink)]/85 px-2 py-1 text-[var(--bone)] transition-colors group-hover:bg-[var(--signal)]">{x.hop.span.split("–")[0].trim()} · {x.hop.org}</span>
+                  <span className="ex-tag mono absolute left-3 top-3 bg-[var(--ink)]/85 px-2 py-1 text-[var(--bone)] transition-[background-color,opacity] group-hover:bg-[var(--signal)]">{x.hop.span.split("–")[0].trim()} · {x.hop.org}</span>
                 </button>
               ))}
             </div>
@@ -134,7 +135,7 @@ export function Experience() {
           </div>
         </div>
       )}
-      <style>{`@keyframes exin{from{transform:scale(1.25);filter:brightness(.5)}to{transform:scale(1);filter:none}}`}</style>
+      <style>{`.ex-bld{width:max(100vw,177.78svh)}@media (max-aspect-ratio: 1/1){.ex-bld{width:100vw}.ex-tag{font-size:8px;left:4px;top:4px;padding:1px 4px;white-space:nowrap}[data-zoom=true] .ex-tag{opacity:0}}@keyframes exin{from{transform:scale(1.25);filter:brightness(.5)}to{transform:scale(1);filter:none}}`}</style>
     </section>
   );
 }
