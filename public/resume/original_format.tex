@@ -1,0 +1,309 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=0.5 cm, % seperation between body and page edge from the top
+    bottom=0.5 cm, % seperation between body and page edge from the bottom
+    left=0.75 cm, % seperation between body and page edge from the left
+    right=0.75 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={John Doe's CV},
+    pdfauthor={John Doe},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+        \fontsize{25 pt}{25 pt}\selectfont Sayak Roy\\
+        \fontsize{13pt}{15pt}\selectfont AI Infrastructure \& Automation Engineer
+        \vspace{0.2 cm}
+
+        \normalsize
+        \mbox{Chennai}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{mailto:sayakr05@gmail.com}{Gmail}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{tel:91 6033073031}{6033073031}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://sayakroyportfolio.netlify.app/}{Portfolio}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/sayak--roy}{linkedin.com}}%
+        \kern 5.0 pt%
+        \AND%
+        \kern 5.0 pt%
+        \mbox{\hrefWithoutArrow{https://github.com/sayakr428}{github.com}}%
+    \end{header}
+
+    \vspace{5 pt - 0.3 cm}
+
+    \section{Professional Summary}
+\begin{onecolentry}
+At \textbf{Tata Communications}, I work as an \textbf{AI Infrastructure \& Automation Engineer} with 3+ years of experience across \textbf{cloud}, \textbf{DevOps}, and \textbf{network automation}. I have been developing \textbf{AI-integrated infrastructure systems} using \textbf{Terraform}, \textbf{Ansible}, and applying my \textbf{full-stack engineering} knowledge. I construct \textbf{automation systems} for \textbf{AWS}, \textbf{Docker}, and \textbf{Kubernetes}, and hold practical understanding of \textbf{BGP}, \textbf{SDN}, and \textbf{telemetry systems}. I am passionate about \textbf{building automation platforms} that integrate \textbf{DevOps with AI tools} to create scalable and intelligent systems.
+\end{onecolentry}
+        \vspace{0.2 cm}
+
+ \section{Skills}
+\begin{onecolentry}
+    \begin{highlightsforbulletentries}
+        \item \textbf{Cloud \& Infrastructure} – AWS (EC2, Lambda, S3, CloudWatch, API Gateway, EKS, ECS), Azure, Terraform, Ansible, AWS CDK, CloudFormation, NGINX, Docker, Kubernetes.
+        \item \textbf{Programming \& Frameworks} – \textbf{Python}, \textbf{JavaScript}, HTML, MATLAB, \textbf{Streamlit}, \textbf{FAST API}, \textbf{Flask}, \textbf{Selenium}, Power Automate.
+        \item \textbf{Operating Systems} – Linux (Ubuntu, Debian), Windows, MAC OS.
+        \item \textbf{DevOps \& CI/CD} – GitHub Actions, Jenkins, GitLab CI/CD, Cloud-native deployment.
+        \item \textbf{Machine Learning \& AI} – Time-Series Models (\textbf{ARIMA}, \textbf{SARIMAX}, \textbf{Prophet}, \textbf{XGBoost}, \textbf{LSTM}, \textbf{TimeGPT}), Ensemble Learning, Anomaly Detection (\textbf{Isolation Forest, LOF, One-Class SVM}), Clustering (\textbf{K-Means}, \textbf{DBSCAN}), \textbf{CNN}, \textbf{RNN}.
+        \item \textbf{Full-Stack Development} – React.js, Tailwind CSS, Express.js, Flask, RESTful API Design, JWT Auth, Environment Management, PostgreSQL, MongoDB, SQL.
+        \item \textbf{Data Engineering \& Automation} – \textbf{Pandas}, \textbf{NumPy}, \textbf{OpenPyXL}, \textbf{XlsxWriter}, \textbf{python-pptx}, \textbf{ETL Pipelines}, Excel/PPT Automation, MIS Reporting, API Integrations.
+        \item \textbf{Monitoring \& Visualization} – Grafana, Prometheus, Kentik, Power BI, Chronograf, Telegraf, CloudWatch.
+        \item \textbf{Tools \& Platforms} – \textbf{Git}, \textbf{GitHub}, Power Automate, SharePoint, \textbf{n8n}, \textbf{LangChain}, \textbf{LangGraph}, \textbf{ChromaDB}, \textbf{FAISS}, \textbf{Pinecone}, MS Forms.
+    \end{highlightsforbulletentries}
+\end{onecolentry}
+
+        \section{Education}
+\begin{twocolentry}{}{}
+    \textbf{SRM University}, B.Tech in Computer Science (Specialization: Cyber Security)
+\end{twocolentry}
+        \vspace{0.2 cm}
+
+    \section{Experience}
+\begin{twocolentry}{
+    December 2025 – Present
+}
+    \textbf{Deployment \& Maintenance Software Engineer}, DERQ -- Dubai, UAE (Remote)
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Deploy, configure, and maintain AI-powered Intelligent Transportation Systems (ITS) across distributed edge environments using \textbf{Linux}, \textbf{Docker}, and \textbf{Python}.
+        \item Troubleshoot production issues involving \textbf{Edge Processors}, \textbf{RTSP/IP cameras}, \textbf{VPN}, \textbf{TCP/IP}, \textbf{SSH}, and application services through log analysis and root cause identification.
+        \item Develop Python automation tools for deployment, system validation, monitoring, and operational maintenance, improving deployment efficiency and reducing manual effort.
+        \item Collaborate with software, AI, and infrastructure teams to perform remote deployments, software upgrades, configuration management, and production support across global customer sites.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.20cm}
+\begin{twocolentry}{
+    April 2023 – December 2025
+}
+    \textbf{AI Infrastructure \& Automation Engineer}, Tata Communications -- Chennai, Tamil Nadu
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Automated router configurations using \textbf{OpenDaylight SDN Controller} with \textbf{NETCONF/RESTCONF APIs}, reducing manual provisioning effort.
+        \item Designed YAML-based \textbf{OpenConfig templates} for multi-vendor routing protocols (BGP, OSPF, IS-IS, EIGRP).
+        \item Built \textbf{RESTful APIs} to fetch live routing data and push configs, improving operational efficiency and reliability by almost 30\%.
+        \item Automated \textbf{IRR-driven Route Paths and ASN List/AS Set} using \textbf{bgpq3} and custom Python scripts to fetch, parse prefix lists and as-path sets from IRR sources, reduced manual effort by 80\%.
+        \item Built and deployed advanced forecasting systems using \textbf{ARIMA, SARIMAX, Prophet, XGBoost, LSTM, TimeGPT}, enabling accurate traffic prediction, capacity planning, and anomaly detection across Ethernet \& ILL backbones.
+        \item Designed production-grade ML pipelines with dynamic hyperparameter tuning, feature engineering, \textbf{Boosting Ensembles} (Prophet + XGBoost), and a \textbf{3-layer Stacking Ensemble} (\textbf{XGBoost + LSTM + Meta-Model}), successfully deployed for real-time inference.
+        \item Developed anomaly detection engines using \textbf{Z-Score, IQR, Isolation Forest, LOF, One-Class SVM} and clustering models including \textbf{K-Means} and \textbf{DBSCAN} for customer segmentation and traffic behavior analysis.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.2 cm}
+\begin{twocolentry}{
+    March 2022 – Jan 2023
+}
+    \textbf{Analyst Intern}, Accenture -- Bangalore, Karnataka
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Developed \textbf{dynamic dashboards} and \textbf{data-driven UI} using \textbf{React.js}, \textbf{Tailwind CSS}, and \textbf{Redux-Saga}, enabling seamless visualization of campaign performance and engagement metrics.
+        \item Utilized \textbf{Python}, \textbf{MongoDB}, and \textbf{SQL} for querying, preprocessing, and implementing \textbf{dynamic data filtering} powering interactive visual elements.
+        \item Worked with \textbf{cross-functional teams} to define KPIs, optimize \textbf{API performance}, and design efficient \textbf{JSON payload structures} for streamlined communication.
+    \end{highlights}
+\end{onecolentry}
+
+    \section{Certifications}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Google IT Automation with Python Professional Certificate.
+        \item Building Modern Python Applications on AWS.
+        \item Designing and Implementing Azure AI Solutions.
+    \end{highlights}
+\end{onecolentry}
+
+ \section{Projects}
+\begin{onecolentry}
+    \textbf{\href{https://github.com/sayakr428/leo-kpi-monitoring}{LEO Satellite KPI Monitoring using mtr, iPerf3 \& InfluxDB}}
+    \begin{highlights}
+        \item Deployed \textbf{Raspberry Pi} devices as low‑cost, on‑site network probes at multiple test locations.
+        \item Integrated with \textbf{LEO satellite} terminals to capture end‑to‑end performance data.
+        \item Automated KPI collection using tools like \textbf{iperf3} and \textbf{mtr}, scheduled via \textbf{cron‑jobs}.
+        \item Built \textbf{Python‑scripts} to process metrics and send them to a central \textbf{InfluxDB} time‑series database.
+        \item Configured \textbf{Telegraf} for secure, periodic data push from probes to the monitoring server.
+        \item Developed real‑time dashboards in \textbf{Chronograf} for visualization and alerting.
+        \item Enabled historical performance tracking and geographical comparison of satellite link quality.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.20 cm}
+\begin{onecolentry}
+    \textbf{\href{https://github.com/sayakr428/Implemented-BGP-monitoring-Protocol-to-get-graphical-representation-of-the-BGP-data-s}{BMP to get graphical representation of the BGP data’s}}
+    \begin{highlights}
+        \item Designed and deployed a containerized monitoring framework to collect, process, and visualize BGP routing updates using the \textbf{BGP Monitoring Protocol}.
+        \item Deployed \textbf{OpenBMP} collector and supporting services in \textbf{Docker} containers for portability and ease of deployment.
+        \item Integrated with routers to receive BMP feeds containing real‑time BGP routing table snapshots and updates.
+        \item Configured \textbf{Zookeeper} \& \textbf{Kafka} within Docker for scalable BMP message streaming.
+        \item Stored and indexed routing data in \textbf{PostgreSQL} for historical analysis.
+        \item Built \textbf{Grafana} dashboard for monitoring BGP peer health, routing stability, and prefix reachability.
+        \item Automated alerts for route flaps, \textbf{suspicious prefix} announcements, and dropouts from the peer session.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.20cm}
+\begin{onecolentry}
+    \textbf{\href{https://github.com/sayakr428/cloud-butler-infra}{AI Chatbot \& n8n Automation Pipeline}}
+    \begin{highlights}
+        \item Built a chat-driven DevOps automation system using \textbf{n8n}, \textbf{OpenAI}, and \textbf{Terraform Cloud}, enabling users to provision AWS infrastructure through natural language commands.
+        \item Designed AI workflows that convert user prompts into validated \textbf{Terraform templates} for EC2, S3, RDS, VPC, IAM, and Security Groups, ensuring fully automated, error-free provisioning.
+        \item Integrated \textbf{remote Terraform workspaces} with dynamic variable injection, automated runs, and real-time status updates returned directly to the chatbot interface.
+        \item Delivered an end-to-end \textbf{Conversational Infrastructure-as-Code (CIaC)} pipeline that eliminated manual configuration and demonstrated advanced cloud automation and AI orchestration capabilities.
+    \end{highlights}
+\end{onecolentry}
+
+    \section{ Competitions And Awards}
+        \begin{onecolentry}
+    \textbf{Extra Mile Award} \hfill \textit{Aug 2024 | Tata Communications}
+    \begin{highlights}
+        \item Received the “\textbf{Extra Mile Award}” for designing and developing an automation framework that dynamically generated \textbf{JSON configuration files} for diverse \textbf{BGP session setups}.
+        \item Integrated the solution with Tata Communications’ private \textbf{IZO Cloud platform}, enabling seamless deployment via \textbf{Ansible playbooks}.
+    \end{highlights}
+\end{onecolentry}
+
+\end{document}

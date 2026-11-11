@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sayak Roy - Resume</title>
+<meta name="author" content="Sayak Roy">
+<style>
+  /* HTML/CSS replica of Sayak_Roy_Resume.tex (RenderCV article, 10pt, Charter) */
+  @page { size: Letter; margin: 0.5cm 0.75cm 0.5cm 0.75cm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; color: #000; }
+  body {
+    font-family: 'Charter', 'Bitstream Charter', 'XCharter', 'Cambria', 'Georgia', serif;
+    font-size: 10pt; line-height: 12pt;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  @media screen { .page { width: 8.5in; padding: 0.5cm 0.75cm; margin: 0 auto; } }
+  a { color: #000; text-decoration: none; }
+  p { margin: 0; }
+  b { font-weight: 700; }
+
+  /* header: centred, \linespread{1.5} */
+  header { text-align: center; }
+  header .name { font-size: 25pt; line-height: 25pt; }
+  header .title { font-size: 13pt; line-height: 15pt; margin-top: 4pt; }
+  header .contact { margin-top: 0.2cm; line-height: 18pt; white-space: nowrap; }
+  header .contact .sep { margin: 0 5pt; }
+
+  /* \titleformat{\section}{\bfseries\large}...[\vspace{1pt}\titlerule]; \titlespacing{-1pt}{0.3cm}{0.2cm} */
+  h2 {
+    font-size: 12pt; line-height: 14pt; font-weight: 700;
+    margin: 0.3cm 0 0.2cm -1pt; padding-bottom: 1pt;
+    border-bottom: 0.4pt solid #000;
+    break-after: avoid; page-break-after: avoid;
+  }
+  .vs { display: block; }
+  .keephead { break-inside: avoid; page-break-inside: avoid; }
+  ul.hl.hlfirst { margin-bottom: 0; }
+  .onecol > ul.hl.hlrest { margin-top: 0.10cm; }
+
+  /* twocolentry: \setcolumnwidth{\fill, 4.5cm}, \columnsep 0.15cm */
+  .twocol { display: grid; grid-template-columns: 1fr 4.5cm; column-gap: 0.15cm; break-after: avoid; page-break-after: avoid; }
+  .twocol .r { text-align: right; }
+  .hf { display: flex; justify-content: space-between; break-after: avoid; }
+  .onecol > p + ul.hl, .onecol > .hf + ul.hl { margin-top: 0.10cm; }
+
+  /* highlights: topsep 0.10cm, parsep 0.10cm, itemsep 0, leftmargin 10pt */
+  ul.hl { list-style: none; margin: 0.10cm 0; padding: 0 0 0 10pt; }
+  .onecol > ul.hl:first-child { margin-top: 0; }
+  ul.hl > li { position: relative; break-inside: avoid; page-break-inside: avoid; }
+  ul.hl > li + li { margin-top: 0.10cm; }
+  ul.hl > li::before { content: "\2022"; position: absolute; left: -9pt; font-size: 9pt; }
+</style>
+</head>
+<body>
+<div class="page">
+<header>
+  <div class="name">Sayak Roy</div>
+  <div class="title">AI Automation &amp; Platform Engineer</div>
+  <div class="contact"><span>Agartala, Tripura</span><span class="sep">|</span><a href="mailto:sayakr05@gmail.com">Gmail</a><span class="sep">|</span><a href="tel:+916033073031">6033073031</a><span class="sep">|</span><a href="https://github.com/sayakr428">Portfolio</a><span class="sep">|</span><a href="https://www.linkedin.com/in/sayak--roy">linkedin.com</a><span class="sep">|</span><a href="https://github.com/sayakr428">github.com</a></div>
+</header>
+<div class="vs" style="height:calc(5pt - 0.3cm)"></div>
+<h2>Professional Summary</h2>
+<div class="onecol">
+<p><b>AI Automation &amp; Platform Engineer</b> with 3+ years of experience across <b>network automation</b>, <b>cloud</b>, <b>DevOps</b>, and <b>edge operations</b>. At <b>DERQ</b>, I maintain <b>AI-powered Intelligent Transportation Systems</b> and built <b>Derq Ops</b>, an operations platform with <b>SSH health checks</b>, <b>Playwright automation</b>, and an <b>MCP-connected AI agent</b>. At <b>Tata Communications</b>, I automated <b>SDN/BGP provisioning</b> (<b>80%</b> less manual effort) and built <b>ML traffic forecasting</b>. I also ship <b>full-stack AI products</b> with <b>Next.js</b>, <b>Supabase</b>, and <b>Claude/OpenAI APIs</b>.</p>
+</div>
+<div class="vs" style="height:0.2cm"></div>
+<h2>Skills</h2>
+<div class="onecol">
+<ul class="hl hlb">
+<li><b>Cloud &amp; Infrastructure</b> – <b>AWS</b> (EC2, Lambda, S3, CloudWatch, API Gateway, EKS, ECS), <b>Azure</b>, <b>Terraform</b>, <b>Ansible</b>, AWS CDK, CloudFormation, NGINX, <b>Docker</b>, <b>Kubernetes</b>.</li>
+<li><b>Networking &amp; SDN</b> – <b>OpenDaylight</b>, <b>NETCONF/RESTCONF</b>, <b>YANG/OpenConfig</b>, <b>BGP</b>, <b>OSPF</b>, <b>IS-IS</b>, <b>EIGRP</b>, <b>BMP</b>, <b>bgpq3</b>.</li>
+<li><b>Edge &amp; Ops</b> – <b>Linux</b>, <b>Docker</b>, <b>SSH/paramiko</b>, <b>RTSP/ffprobe</b>, <b>VPN</b>, <b>TCP/IP</b>, <b>OpenCV</b>.</li>
+<li><b>Programming &amp; Frameworks</b> – <b>Python</b>, <b>JavaScript</b>, <b>TypeScript</b>, HTML, MATLAB, <b>Next.js</b>, <b>Streamlit</b>, <b>FAST API</b>, <b>Flask</b>, <b>Selenium</b>, <b>Playwright</b>.</li>
+<li><b>Operating Systems</b> – <b>Linux</b> (Ubuntu, Debian), Windows, MAC OS.</li>
+<li><b>DevOps &amp; CI/CD</b> – <b>GitHub Actions</b>, <b>Jenkins</b>, <b>GitLab CI/CD</b>, Cloud-native deployment, <b>pytest</b>.</li>
+<li><b>Machine Learning &amp; AI</b> – Time-Series Models (<b>ARIMA</b>, <b>SARIMAX</b>, <b>Prophet</b>, <b>XGBoost</b>, <b>LSTM</b>, <b>TimeGPT</b>), Ensemble Learning, Anomaly Detection (<b>Isolation Forest, LOF, One-Class SVM</b>), Clustering (<b>K-Means</b>, <b>DBSCAN</b>), <b>CNN</b>, <b>RNN</b>, <b>Claude/OpenAI APIs</b>.</li>
+<li><b>Full-Stack Development</b> – <b>React.js</b>, <b>Next.js</b>, <b>Tailwind CSS</b>, Express.js, Flask, <b>RESTful API Design</b>, JWT Auth, Environment Management, <b>PostgreSQL</b>, <b>Supabase</b>, <b>MongoDB</b>, <b>SQL</b>.</li>
+<li><b>Data Engineering &amp; Automation</b> – <b>Pandas</b>, <b>NumPy</b>, <b>OpenPyXL</b>, <b>XlsxWriter</b>, <b>python-pptx</b>, <b>ETL Pipelines</b>, Excel/PPT Automation, MIS Reporting, API Integrations.</li>
+<li><b>Monitoring &amp; Visualization</b> – <b>Grafana</b>, <b>Prometheus</b>, Kentik, Power BI, <b>Chronograf</b>, <b>Telegraf</b>, <b>CloudWatch</b>.</li>
+<li><b>Tools &amp; Platforms</b> – <b>Git</b>, <b>GitHub</b>, Power Automate, SharePoint, <b>n8n</b>, <b>LangChain</b>, <b>LangGraph</b>, <b>MCP</b>, <b>ChromaDB</b>, <b>FAISS</b>, <b>Pinecone</b>, MS Forms.</li>
+</ul>
+</div>
+<h2>Education</h2>
+<div class="twocol"><div class="l"><b>SRM University</b>, B.Tech in Computer Science (Specialization: Cyber Security)</div><div class="r"></div></div>
+<div class="vs" style="height:0.2cm"></div>
+<h2>Experience</h2>
+<div class="keephead"><div class="twocol"><div class="l"><b>Deployment &amp; Maintenance Software Engineer</b>, DERQ – Dubai, UAE (Remote)</div><div class="r">December 2025 – Present</div></div>
+<div class="vs" style="height:0.10cm"></div>
+<div class="onecol"><ul class="hl hlfirst">
+<li>Deploy, configure, and maintain AI-powered Intelligent Transportation Systems (ITS) across distributed edge environments using <b>Linux</b>, <b>Docker</b>, and <b>Python</b>.</li>
+</ul></div></div>
+<div class="onecol">
+<ul class="hl hlrest">
+<li>Troubleshoot production issues involving <b>Edge Processors</b>, <b>RTSP/IP cameras</b>, <b>VPN</b>, <b>TCP/IP</b>, <b>SSH</b>, and application services through log analysis and root cause identification.</li>
+<li>Develop Python automation tools for deployment, system validation, monitoring, and operational maintenance, improving deployment efficiency and reducing manual effort.</li>
+<li>Collaborate with software, AI, and infrastructure teams to perform remote deployments, software upgrades, configuration management, and production support across global customer sites.</li>
+<li>Built <b>Derq Ops</b>, a local <b>operations platform</b> (<b>Python 3.12</b>, <b>FastAPI</b>, <b>Jinja2/HTMX</b>, <b>SQLite</b>) consolidating daily site maintenance.</li>
+<li>Automated the daily <b>backlog report</b> (<b>Slack API</b>, <b>Playwright</b>-driven DERQ dashboard, <b>SSH</b>) with <b>Excel/CSV</b> export and <b>Slack</b> post.</li>
+<li>Implemented <b>Priority 1/2/3</b> SSH checks (<b>paramiko</b>), incl. <b>RTSP checks</b> with <b>ffprobe</b> and <b>one-click service restarts</b>.</li>
+<li>Built <b>camera-movement detection</b> using <b>OpenCV</b> feature matching against reference frames.</li>
+<li>Integrated an <b>AI agent</b> with <b>MCP connectors</b> (Gmail, Calendar, Drive, Slack, GitHub) and <b>in-browser voice</b>.</li>
+<li>Covered the platform with <b>230 automated tests</b> (<b>pytest</b>), including <b>end-to-end Playwright tests</b> against a mock dashboard.</li>
+</ul>
+</div>
+<div class="vs" style="height:0.20cm"></div>
+<div class="keephead"><div class="twocol"><div class="l"><b>AI Infrastructure &amp; Automation Engineer</b>, Tata Communications – Chennai, Tamil Nadu</div><div class="r">April 2023 – December 2025</div></div>
+<div class="vs" style="height:0.10cm"></div>
+<div class="onecol"><ul class="hl hlfirst">
+<li>Automated router configurations using <b>OpenDaylight SDN Controller</b> with <b>NETCONF/RESTCONF APIs</b>, reducing manual provisioning effort.</li>
+</ul></div></div>
+<div class="onecol">
+<ul class="hl hlrest">
+<li>Designed YAML-based <b>OpenConfig templates</b> for multi-vendor routing protocols (BGP, OSPF, IS-IS, EIGRP).</li>
+<li>Built <b>RESTful APIs</b> to fetch live routing data and push configs, improving operational efficiency and reliability by almost 30%.</li>
+<li>Automated <b>IRR-driven Route Paths and ASN List/AS Set</b> using <b>bgpq3</b> and custom Python scripts to fetch, parse prefix lists and as-path sets from IRR sources, reduced manual effort by 80%.</li>
+<li>Built and deployed advanced forecasting systems using <b>ARIMA, SARIMAX, Prophet, XGBoost, LSTM, TimeGPT</b>, enabling accurate traffic prediction, capacity planning, and anomaly detection across Ethernet &amp; ILL backbones.</li>
+<li>Designed production-grade ML pipelines with dynamic hyperparameter tuning, feature engineering, <b>Boosting Ensembles</b> (Prophet + XGBoost), and a <b>3-layer Stacking Ensemble</b> (<b>XGBoost + LSTM + Meta-Model</b>), successfully deployed for real-time inference.</li>
+<li>Developed anomaly detection engines using <b>Z-Score, IQR, Isolation Forest, LOF, One-Class SVM</b> and clustering models including <b>K-Means</b> and <b>DBSCAN</b> for customer segmentation and traffic behavior analysis.</li>
+</ul>
+</div>
+<div class="vs" style="height:0.2cm"></div>
+<div class="keephead"><div class="twocol"><div class="l"><b>Analyst Intern</b>, Accenture – Bangalore, Karnataka</div><div class="r">March 2022 – Jan 2023</div></div>
+<div class="vs" style="height:0.10cm"></div>
+<div class="onecol"><ul class="hl hlfirst">
+<li>Developed <b>dynamic dashboards</b> and <b>data-driven UI</b> using <b>React.js</b>, <b>Tailwind CSS</b>, and <b>Redux-Saga</b>, enabling seamless visualization of campaign performance and engagement metrics.</li>
+</ul></div></div>
+<div class="onecol">
+<ul class="hl hlrest">
+<li>Utilized <b>Python</b>, <b>MongoDB</b>, and <b>SQL</b> for querying, preprocessing, and implementing <b>dynamic data filtering</b> powering interactive visual elements.</li>
+<li>Worked with <b>cross-functional teams</b> to define KPIs, optimize <b>API performance</b>, and design efficient <b>JSON payload structures</b> for streamlined communication.</li>
+</ul>
+</div>
+<h2>Certifications</h2>
+<div class="onecol">
+<ul class="hl">
+<li>Google IT Automation with Python Professional Certificate.</li>
+<li>Building Modern Python Applications on AWS.</li>
+<li>Designing and Implementing Azure AI Solutions.</li>
+<li>Google Cloud Professional Data Engineer.</li>
+<li>Red Hat.</li>
+</ul>
+</div>
+<h2>Projects</h2>
+<div class="onecol">
+<p><b><a href="https://vitacount.vercel.app">VitaCount (MyChiffre) – AI Financial Operating System</a></b></p>
+<ul class="hl">
+<li>Built an <b>AI financial operating system</b> with <b>Next.js</b>, <b>TypeScript</b>, and <b>Supabase Postgres</b> + <b>RLS</b> multi-tenant isolation.</li>
+<li>Designed a <b>posting engine</b> that turns invoices, bills, and bank lines into GL entries, with a <b>balance-enforcing Postgres trigger</b> that rejects unbalanced journal entries.</li>
+<li>Delivered <b>AR/AP</b>, <b>Claude Vision receipt OCR</b>, <b>Plaid bank reconciliation</b>, and <b>FIFO inventory</b> accounting.</li>
+<li>Added an agentic layer with <b>reconciliation</b>, <b>AP bookkeeping</b>, and <b>AR collections agents</b> using tool-calling.</li>
+</ul>
+</div>
+<div class="vs" style="height:0.20cm"></div>
+<div class="onecol">
+<p><b><a href="https://walkthrough.mrityikaestates.com">Shantiban City 3D Walkthrough</a></b></p>
+<ul class="hl">
+<li>Built a browser-based <b>3D walkthrough</b> of a real township in <b>three.js</b>, with all <b>220 plots traced from the master plan</b>.</li>
+<li>Rendered a <b>physically based sky</b> matched to the site's latitude, optimized to run smoothly on <b>mobile devices</b>.</li>
+</ul>
+</div>
+<div class="vs" style="height:0.20cm"></div>
+<div class="onecol">
+<p><b><a href="https://github.com/sayakr428/cloud-butler-infra">AI Chatbot &amp; n8n Automation Pipeline</a></b></p>
+<ul class="hl">
+<li>Built a chat-driven DevOps automation system using <b>n8n</b>, <b>OpenAI</b>, and <b>Terraform Cloud</b>, enabling users to provision AWS infrastructure through natural language commands.</li>
+<li>Designed AI workflows that convert user prompts into validated <b>Terraform templates</b> for EC2, S3, RDS, VPC, IAM, and Security Groups, ensuring fully automated, error-free provisioning.</li>
+<li>Integrated <b>remote Terraform workspaces</b> with dynamic variable injection, automated runs, and real-time status updates returned directly to the chatbot interface.</li>
+<li>Delivered an end-to-end <b>Conversational Infrastructure-as-Code (CIaC)</b> pipeline that eliminated manual configuration and demonstrated advanced cloud automation and AI orchestration capabilities.</li>
+</ul>
+</div>
+<h2>Competitions And Awards</h2>
+<div class="onecol">
+<div class="hf"><span><b>Extra Mile Award</b></span><span><i>Aug 2024 | Tata Communications</i></span></div>
+<ul class="hl">
+<li>Received the “<b>Extra Mile Award</b>” for designing and developing an automation framework that dynamically generated <b>JSON configuration files</b> for diverse <b>BGP session setups</b>.</li>
+<li>Integrated the solution with Tata Communications’ private <b>IZO Cloud platform</b>, enabling seamless deployment via <b>Ansible playbooks</b>.</li>
+</ul>
+</div>
+</div>
+</body>
+</html>

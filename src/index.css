@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* Modern edition — Anton for the big type, Instrument Serif for the voice, Geist for reading, Geist Mono for small print.
+   Cobalt field, bone paper, ink. One signal colour, used sparingly. */
+@font-face { font-family: "Anton"; src: url(/fonts/anton.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url(/fonts/iserif.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Instrument Serif"; src: url(/fonts/iserif-italic.woff2) format("woff2"); font-style: italic; font-display: swap; }
+@font-face { font-family: "Geist"; src: url(/fonts/geist-400.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Geist"; src: url(/fonts/geist-500.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Geist Mono"; src: url(/fonts/geist-mono.woff2) format("woff2"); font-display: swap; }
+
+:root {
+  --field: #2337c6;
+  --field-deep: #1a2a9c;
+  --bone: #ece7dd;
+  --bone-2: #ddd6c8;
+  --ink: #0e0e11;
+  --ink-2: #18181d;
+  --muted: #8d8a83;
+  --signal: #ff5a1f;
+  --m: clamp(18px, 3vw, 48px);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@theme {
+  --color-field: var(--field);
+  --color-bone: var(--bone);
+  --color-ink: var(--ink);
+  --color-signal: var(--signal);
+  --font-sans: "Geist", system-ui, sans-serif;
+  --font-display: "Anton", "Impact", sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html { background: var(--ink); -webkit-text-size-adjust: 100%; }
+  html.lenis, html.lenis body { height: auto; }
+  .lenis.lenis-smooth { scroll-behavior: auto !important; }
+  body { margin: 0; background: var(--ink); color: var(--bone); font-family: var(--font-sans); font-size: clamp(1rem, .96rem + .2vw, 1.125rem); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  img, video { display: block; max-width: 100%; }
+  ::selection { background: var(--signal); color: #fff; }
+  :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+}
+
+@layer components {
+  .wrap { padding-inline: var(--m); }
+  .display { font-family: var(--font-display); text-transform: uppercase; line-height: .82; letter-spacing: -.01em; }
+  .serif { font-family: var(--font-serif); font-weight: 400; letter-spacing: -.01em; }
+  .mono { font-family: var(--font-mono); font-size: .8rem; letter-spacing: .02em; }
+  .pretty { text-wrap: pretty; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .pill { display: inline-flex; align-items: center; gap: .6em; min-height: 46px; padding: 0 1.25rem; border-radius: 999px; box-shadow: inset 0 0 0 1.5px currentColor; font-weight: 500; transition: background-color .3s var(--ease-out), color .3s var(--ease-out), transform .25s var(--ease-out); }
+  .pill:hover { background: var(--bone); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--bone); }
+  .pill-solid { background: var(--bone); color: var(--ink); box-shadow: none; }
+  .pill-solid:hover { background: var(--signal); color: #fff; }
+  .uline { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; padding-bottom: 2px; transition: background-size .45s var(--ease-out); }
+  .uline:hover { background-size: 0% 1px; background-position: 100% 100%; }
+  .mask-line { display: block; overflow: hidden; padding-bottom: .04em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
