@@ -19,6 +19,18 @@ npm run build     # type-check, then build to dist/
 npm run preview   # serve the build at http://localhost:4173
 ```
 
+## Media on Cloudinary
+
+The heavy media (the film, project recordings, scenes and photos, about 47 MB) is served from Cloudinary with automatic format and quality, so the site itself ships under 1 MB. The code keeps plain paths like `"/live/webgrow.mp4"`; at build time a small Vite plugin (`vite.config.ts`) swaps each one for its Cloudinary URL from `cdn-manifest.json`.
+
+To add or update media, put the file under `public/<folder>/` and run:
+
+```bash
+CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name> node scripts/cdn-upload.mjs
+```
+
+It uploads only new or changed files and updates the manifest. The secret is read from the environment and never written anywhere. Uploaded originals can then move to `_cdn_originals/` (ignored by git). Delete `cdn-manifest.json` to serve everything from `public/` again.
+
 ## What's on the page
 
 | Part | What it does |

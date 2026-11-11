@@ -33,8 +33,8 @@ export function WorksScene() {
               style={{ left: `${b.screen.x}%`, top: `${b.screen.y}%`, width: `${b.screen.w}%`, height: `${b.screen.h}%`, transform: on === i ? "translateY(-4%) scale(1.04)" : "none", filter: on >= 0 && on !== i ? "brightness(.55)" : "none" }}>
               {b.media.video ? (lite
                   // in lite mode the screens are a few dozen pixels wide: a still reads the same and costs nothing
-                  ? <img src={b.media.video.replace(".mp4", ".jpg")} alt="" className="h-full w-full object-cover" />
-                  : <AutoVideo src={b.media.video} poster={b.media.video.replace(".mp4", ".jpg")} className="h-full w-full object-cover" />)
+                  ? <img src={b.media.poster} alt="" className="h-full w-full object-cover" />
+                  : <AutoVideo src={b.media.video} poster={b.media.poster} className="h-full w-full object-cover" />)
                 : b.media.img ? <img src={b.media.img} alt="" className="h-full w-full object-cover object-top" />
                 : <div className="h-full w-full text-[5px]"><DerqDiagram /></div>}
             </div>

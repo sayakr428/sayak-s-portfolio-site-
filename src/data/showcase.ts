@@ -9,7 +9,7 @@ export type Build = {
   id: string; name: string; kind: string;
   screen: { x: number; y: number; w: number; h: number };    // % of the scene image
   hit: { x: number; y: number; w: number; h: number };       // larger click area around the device
-  media: { video?: string; img?: string; diagram?: boolean };
+  media: { video?: string; poster?: string; img?: string; diagram?: boolean };
   mode: Mode; also?: { label: string; url: string }[];
 };
 
@@ -20,7 +20,7 @@ export const BUILDS: readonly Build[] = [
     mode: { kind: "still", img: "/work/stellar.webp", url: "https://app.stellardesigns.solutions/", note: "Stellar's security settings don't allow it inside other sites, so it opens in its own tab." } },
   { id: "shantiban", name: "Shantiban City", kind: "3D township · three.js",
     screen: { x: 28.63, y: 63.61, w: 2.69, h: 10.48 }, hit: { x: 25.5, y: 26, w: 9, h: 50 },
-    media: { video: "/live/walkthrough.mp4" },
+    media: { video: "/live/walkthrough.mp4", poster: "/live/walkthrough.jpg" },
     mode: { kind: "live", url: "https://walkthrough.mrityikaestates.com/" },
     also: [{ label: "Sales site", url: "https://mrityikaestates.com/" }] },
   { id: "derq", name: "Derq Ops", kind: "Internal platform · Derq",
@@ -33,12 +33,12 @@ export const BUILDS: readonly Build[] = [
     mode: { kind: "app", screens: [{ label: "Dashboard", img: "/work/mc-dashboard.jpg" }, { label: "Ledger", img: "/work/mc-ledger.jpg" }, { label: "Agents", img: "/work/mc-agents.jpg" }, { label: "Sales", img: "/work/mc-sales.jpg" }] } },
   { id: "webgrow", name: "WebGrow360", kind: "Agency · four rebuilds",
     screen: { x: 75.8, y: 64.91, w: 2.51, h: 8.14 }, hit: { x: 73, y: 26, w: 9, h: 50 },
-    media: { video: "/live/webgrow.mp4" },
+    media: { video: "/live/webgrow.mp4", poster: "/live/webgrow.jpg" },
     mode: { kind: "live", url: "https://webgrow360.online/", phone: true },
     also: [{ label: "Real estate desk", url: "https://realestate.webgrow360.online/" }] },
   { id: "webgrow-ai", name: "WebGrow .AI", kind: "AI agency · WebGL",
     screen: { x: 88.12, y: 59.9, w: 5.41, h: 13.02 }, hit: { x: 84, y: 26, w: 12, h: 50 },
-    media: { video: "/live/webgrow-ai.mp4" },
+    media: { video: "/live/webgrow-ai.mp4", poster: "/live/webgrow-ai.jpg" },
     mode: { kind: "live", url: "https://ai.webgrow360.online/" } },
 ];
 

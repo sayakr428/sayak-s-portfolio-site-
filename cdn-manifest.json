@@ -1,0 +1,200 @@
+{
+ "cloud": "yqviszke",
+ "assets": {
+  "/audio/score.mp3": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/v1794393453/portfolio/audio/score.mp3",
+   "sha": "efc24e30c24932664805d90daa60c2a1baa586c5",
+   "bytes": 1172205
+  },
+  "/broll/datacenter.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393454/portfolio/broll/datacenter.jpg",
+   "sha": "b7a2928462f62ddca1275b7d7e634e27135e5761",
+   "bytes": 33758
+  },
+  "/broll/datacenter.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393454/portfolio/broll/datacenter.mp4",
+   "sha": "585646875cc2536bfbd27213dc94636d5f0816b6",
+   "bytes": 405377
+  },
+  "/broll/traffic.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393456/portfolio/broll/traffic.jpg",
+   "sha": "58568fdf33f9f22c0ef19cd8a12f5477be4d9ad2",
+   "bytes": 151754
+  },
+  "/broll/traffic.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393457/portfolio/broll/traffic.mp4",
+   "sha": "ff8decb27d760e987a36e241d998976cb61c1a23",
+   "bytes": 869254
+  },
+  "/doors/work.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393458/portfolio/doors/work.jpg",
+   "sha": "239850af966702ae2238caf3e2774612deb2c4c3",
+   "bytes": 421295
+  },
+  "/experience/building.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393459/portfolio/experience/building.jpg",
+   "sha": "d35c93426c0a2219cd28807f5cef60c80ae7774a",
+   "bytes": 356533
+  },
+  "/experience/room-accenture.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393460/portfolio/experience/room-accenture.jpg",
+   "sha": "ca6f4f7264f706c2a2416f101e7a28582f42fd68",
+   "bytes": 323234
+  },
+  "/experience/room-derq.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393461/portfolio/experience/room-derq.jpg",
+   "sha": "d0c450f38c926aabfd4d136cbba3d81abd07cab7",
+   "bytes": 132757
+  },
+  "/experience/room-srm.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393461/portfolio/experience/room-srm.jpg",
+   "sha": "dfd83eb00a73a6a9da8bbdf58390f25b90de37da",
+   "bytes": 373171
+  },
+  "/experience/room-tata.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393462/portfolio/experience/room-tata.jpg",
+   "sha": "e9cb121433150429445df668608c80dca268bd42",
+   "bytes": 116227
+  },
+  "/film/handedon-poster.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393463/portfolio/film/handedon-poster.jpg",
+   "sha": "88c52a6bd97eb0828b334cc6cca025e467b4e6c4",
+   "bytes": 93615
+  },
+  "/film/handedon.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393464/portfolio/film/handedon.jpg",
+   "sha": "edfd15d3b30ce9cd55fd0f71dad2e9d44542cd45",
+   "bytes": 70957
+  },
+  "/film/handedon.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393472/portfolio/film/handedon.mp4",
+   "sha": "2ef3fed6a7ad804b810351ace3dd09bef23f636f",
+   "bytes": 26440037
+  },
+  "/footer/peeps.webp": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393474/portfolio/footer/peeps.webp",
+   "sha": "bd5719eb8cb587660d9e9ae1f6e5f0974a4887ce",
+   "bytes": 584664
+  },
+  "/index/customex.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393475/portfolio/index/customex.jpg",
+   "sha": "03c40a780de26268ff007d44bcda8b03e168629d",
+   "bytes": 28979
+  },
+  "/index/feed.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393475/portfolio/index/feed.jpg",
+   "sha": "1d6dd699b8a246440319c91d4b445532ab2decf5",
+   "bytes": 38174
+  },
+  "/index/finance.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393476/portfolio/index/finance.jpg",
+   "sha": "1250706793f50819610a7210db9065f78bb4e5c5",
+   "bytes": 48858
+  },
+  "/index/golf.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393477/portfolio/index/golf.jpg",
+   "sha": "b8309d5f42766d0b21a3b5833bcff1481007fc47",
+   "bytes": 38356
+  },
+  "/lab/lab-still.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393478/portfolio/lab/lab-still.jpg",
+   "sha": "83d6adbee143c139646d3998ec702db604bcc9d6",
+   "bytes": 326281
+  },
+  "/lab/lab.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393479/portfolio/lab/lab.mp4",
+   "sha": "8f15a0352463aa60bb47643a6d536c9e629dec3f",
+   "bytes": 1711231
+  },
+  "/live/mrityika.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393480/portfolio/live/mrityika.jpg",
+   "sha": "adf22358a6443f80ba3c16d2ccf85b8b54f3f871",
+   "bytes": 96886
+  },
+  "/live/mrityika.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393483/portfolio/live/mrityika.mp4",
+   "sha": "1b33f1f3b4f0a4f01686b0e3bce354fece17df35",
+   "bytes": 4057459
+  },
+  "/live/realestate.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393484/portfolio/live/realestate.jpg",
+   "sha": "8173992dc8eb8673ea4ab3cf3ce45a84279e62bb",
+   "bytes": 25482
+  },
+  "/live/realestate.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393486/portfolio/live/realestate.mp4",
+   "sha": "eafaabdad2ba118bfe2770e6fa17855498a4b14c",
+   "bytes": 3587056
+  },
+  "/live/walkthrough.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393488/portfolio/live/walkthrough.jpg",
+   "sha": "771d8e087ad13627d13294423864088bcd4be7bc",
+   "bytes": 119988
+  },
+  "/live/walkthrough.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393490/portfolio/live/walkthrough.mp4",
+   "sha": "202de07eed240c2025f33190980e74ae3f293469",
+   "bytes": 2052683
+  },
+  "/live/webgrow-ai.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393491/portfolio/live/webgrow-ai.jpg",
+   "sha": "d5f4ce91eea47fad3e297721f1eee96f689eb0a7",
+   "bytes": 136639
+  },
+  "/live/webgrow-ai.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393494/portfolio/live/webgrow-ai.mp4",
+   "sha": "6fe952071a6a121b962201500e800b97d8b91882",
+   "bytes": 1832061
+  },
+  "/live/webgrow.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393495/portfolio/live/webgrow.jpg",
+   "sha": "7df9bee4c0ef503edb81b6c05d7b5ddcfd3af364",
+   "bytes": 39887
+  },
+  "/live/webgrow.mp4": {
+   "url": "https://res.cloudinary.com/yqviszke/video/upload/q_auto/v1794393497/portfolio/live/webgrow.mp4",
+   "sha": "81aa93515837a92bb986fd8876802879f0f9c74f",
+   "bytes": 2261049
+  },
+  "/me/evolution.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393499/portfolio/me/evolution.jpg",
+   "sha": "7f49db2bd1c032cb03728b90b08f9f6438567fcc",
+   "bytes": 197027
+  },
+  "/work/mc-agents.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393500/portfolio/work/mc-agents.jpg",
+   "sha": "901439baa65674b69bed64d1908843cab248dd2f",
+   "bytes": 87225
+  },
+  "/work/mc-dashboard.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393501/portfolio/work/mc-dashboard.jpg",
+   "sha": "9ef576f4d56944721c071d129e66af8b122ff8f8",
+   "bytes": 89484
+  },
+  "/work/mc-ledger.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393501/portfolio/work/mc-ledger.jpg",
+   "sha": "044164db5e5e06d94cb1556f5da4a16aa01d3768",
+   "bytes": 82183
+  },
+  "/work/mc-sales.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393502/portfolio/work/mc-sales.jpg",
+   "sha": "ee2f7f4c7e4d55045856450ef78ca61a70abe12f",
+   "bytes": 126921
+  },
+  "/work/stellar.webp": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393503/portfolio/work/stellar.webp",
+   "sha": "5ae1524f0114a665f30e7edec5f8f74f63f3ad05",
+   "bytes": 78528
+  },
+  "/work/webgrow-ai.webp": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393503/portfolio/work/webgrow-ai.webp",
+   "sha": "6978f6dffd4f69e9408ca9a36e40f4d237ac671b",
+   "bytes": 82410
+  },
+  "/work/works.jpg": {
+   "url": "https://res.cloudinary.com/yqviszke/image/upload/f_auto,q_auto,c_limit,w_2400/v1794393504/portfolio/work/works.jpg",
+   "sha": "0231cfdb54c0f3035c45e907894008b42a5082b6",
+   "bytes": 128804
+  }
+ }
+}
